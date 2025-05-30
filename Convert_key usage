@@ -1,0 +1,42 @@
+Convert_key usage:
+Như chúng ta đã biết,khi dùng `getscancode` thì địa chỉ ở er0 sẽ được lưu dưới dạng này
+```
+Key [1] : 01 01
+```
+Khi sử dụng convert key:
+```
+xr0 = adr_of keycode, 0x83DA   # Địa chỉ keycode chính là cái được set ở er0 với getscancode
+setlr
+cvt_key
+```
+Lúc này, key sẽ được convert về một dạng khác.
+```
+Key [1] : 01 01
+after convert
+Key [1] : 31 00
+```
+Tùy theo keymap [0x7B0E (keytable chung) hoặc 0x83DA (keytable dành cho Base-N)] thì keycode sẽ được convert ra khác nhau
+Cuối cùng,keycode sau khi convert sẽ được lưu ở er0.Lưu ý: là er0 chứ không phải địa chỉ ở er0
+Còn cơ chế hoạt động của convert_key đã được Casio2009 giải thích
+```
+cwx keymap
+1     2     3     4     5     6     7     8
+31 00 32 00 33 00 a6 00 a7 00 00 00 30 fc 00 00 
+34 00 35 00 36 00 a8 00 a9 00 00 00 41 00 00 00 
+37 00 38 00 39 00 3e fc 26 fc 00 00 2d 00 00 00 
+2b fc 38 fc 60 00 d0 00 3a fc 2e fc 2e 00 00 00 
+c0 00 36 fc 54 fc 77 00 78 00 79 00 30 00 00 00 
+50 fc 53 fc 55 fc 52 fc 5b fc 75 00 00 00 00 00 
+01 fc 3c fc 1f fc 1d fc 5d fc 48 00 00 00 00 00 
+29 fc 28 fc 1c fc 1e fc 24 fc 00 00 00 00 00 00
+
+alpha: fc28
+shift: fc29
+calc:  fc3c
+sto:   fc2b
+eng:   fc38
+dms:   fc36
+s<>d:  fc3a
+m+:    fc2e```
+
+Keytable 0x7B0E
